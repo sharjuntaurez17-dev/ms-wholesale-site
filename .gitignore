@@ -1,0 +1,15 @@
+# Local Claude config / plans
+.claude/
+
+# Secrets / env
+.env
+.env.local
+.env.*.local
+
+# Node / Vercel
+node_modules/
+.vercel/
+
+# OS files
+Thumbs.db
+.DS_Store
