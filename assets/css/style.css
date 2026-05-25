@@ -10372,3 +10372,19 @@ footer .footer-item.about img.logo { max-width: 220px; height: auto; border-radi
 }
 @media (max-width: 991px) { .banner-area .banner-style-three img { height: 430px !important; } }
 @media (max-width: 575px) { .banner-area .banner-style-three img { height: 300px !important; } }
+
+/* ===================== Mobile / tablet header cleanup ===================== */
+/* validnavs switches to the mobile hamburger at <=1199px, so match that here */
+@media (max-width: 1199px) {
+    /* Avoid duplicate logos: keep the navbar-brand logo, hide the top-bar one */
+    .top-style-two .logo { display: none !important; }
+    /* Keep a single hamburger (the main nav toggle); hide the side-panel trigger */
+    .navbar .attr-nav .side-menu { display: none !important; }
+}
+@media (max-width: 575px) {
+    /* Drop the small labels so the phone/email fit on phones */
+    .top-style-two .info .content span { display: none; }
+    .top-style-two .info .content a { font-size: 12px; }
+    .top-style-two .info .icon { font-size: 18px; margin-right: 8px; }
+    .top-bar.top-style-two { padding: 4px 0; }
+}

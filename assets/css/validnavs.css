@@ -3070,8 +3070,8 @@ ul.simple-menu-list>li i {
 	.navbar-brand>img {
 		height: auto;
 		max-height: 60px;
-		background: #004f3f;
-		border-radius: 10px;
+		background: transparent;
+		border-radius: 0;
 	}
 
 	nav.navbar.validnavs.navbar-fixed .logo-display {
