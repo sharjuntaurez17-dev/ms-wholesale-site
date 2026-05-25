@@ -1,0 +1,7 @@
+{
+  "name": "ms-wholesale-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "M Shaul Hammed Rowther Sons - wholesale rice website (static site + /api WhatsApp auto-send)"
+}
