@@ -10388,3 +10388,14 @@ footer .footer-item.about img.logo { max-width: 220px; height: auto; border-radi
     .top-style-two .info .icon { font-size: 18px; margin-right: 8px; }
     .top-bar.top-style-two { padding: 4px 0; }
 }
+
+/* Fix: mobile menu — close X was white-on-white (invisible) and gold logo
+   had low contrast on the white menu background */
+#navbar-menu .navbar-toggle i {
+    color: #8B0000 !important;
+}
+#navbar-menu > img {
+    background: #8B0000;
+    padding: 10px 16px;
+    border-radius: 10px;
+}

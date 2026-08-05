@@ -5,22 +5,24 @@
     /* ==================================================
 		    # Tooltip Init
 		===============================================*/
-    $('[data-toggle="tooltip"]').tooltip();
+    $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip();
 
     /* ==================================================
 		    # Youtube Video Init
 		 ===============================================*/
-    $(".player").mb_YTPlayer();
+    if ($.fn.mb_YTPlayer && $(".player").length) {
+      $(".player").mb_YTPlayer();
+    }
 
     /* ==================================================
 		    # Scrolla active
 		===============================================*/
-    $(".animate").scrolla();
+    $.fn.scrolla && $(".animate").scrolla();
 
     /* ==================================================
 		    # imagesLoaded active
 		===============================================*/
-    $("#gallery-masonary,#shop-masonary").imagesLoaded(function () {
+    $.fn.imagesLoaded && $("#gallery-masonary,#shop-masonary").length && $("#gallery-masonary,#shop-masonary").imagesLoaded(function () {
       /* Filter menu */
       $(".mix-item-menu").on("click", "button", function () {
         var filterValue = $(this).attr("data-filter");
@@ -58,10 +60,10 @@
     /* ==================================================
 		    # Fun Factor Init
 		===============================================*/
-    $(".timer").countTo();
-    $(".fun-fact").appear(
+    $.fn.countTo && $(".timer").countTo();
+    $.fn.appear && $(".fun-fact").appear(
       function () {
-        $(".timer").countTo();
+        $.fn.countTo && $(".timer").countTo();
       },
       {
         accY: -100,
@@ -71,12 +73,12 @@
     /* ==================================================
 		    # Magnific popup init
 		 ===============================================*/
-    $(".popup-link").magnificPopup({
+    $.fn.magnificPopup && $(".popup-link").magnificPopup({
       type: "image",
       // other options
     });
 
-    $(".popup-gallery").magnificPopup({
+    $.fn.magnificPopup && $(".popup-gallery").magnificPopup({
       type: "image",
       gallery: {
         enabled: true,
@@ -84,7 +86,7 @@
       // other options
     });
 
-    $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
+    $.fn.magnificPopup && $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
       type: "iframe",
       mainClass: "mfp-fade",
       removalDelay: 160,
@@ -92,7 +94,7 @@
       fixedContentPos: false,
     });
 
-    $(".magnific-mix-gallery").each(function () {
+    $.fn.magnificPopup && $(".magnific-mix-gallery").each(function () {
       var $container = $(this);
       var $imageLinks = $container.find(".item");
 
@@ -191,7 +193,7 @@
     /* ==================================================
             # Banner Carousel
          ===============================================*/
-    const bannerFade = new Swiper(".banner-fade", {
+    const bannerFade = typeof Swiper !== "undefined" && document.querySelector(".banner-fade") && new Swiper(".banner-fade", {
       // Optional parameters
       direction: "horizontal",
       loop: true,
@@ -223,7 +225,7 @@
     /* ==================================================
             # Testimonials Carousel
          ===============================================*/
-    const testimonialCarousel = new Swiper(".testimonial-carousel", {
+    const testimonialCarousel = typeof Swiper !== "undefined" && document.querySelector(".testimonial-carousel") && new Swiper(".testimonial-carousel", {
       // Optional parameters
       direction: "horizontal",
       loop: true,
@@ -242,7 +244,7 @@
     /* ==================================================
             # Testimonials Carousel
          ===============================================*/
-    const testimonialTwoCarousel = new Swiper(
+    const testimonialTwoCarousel = typeof Swiper !== "undefined" && document.querySelector(".testimonial-style-two-carousel") && new Swiper(
       ".testimonial-style-two-carousel",
       {
         // Optional parameters
@@ -268,7 +270,7 @@
     /* ==================================================
             # Gallery Style One Carousel
          ===============================================*/
-    const galleryOne = new Swiper(".gallery-style-one-carousel", {
+    const galleryOne = typeof Swiper !== "undefined" && document.querySelector(".gallery-style-one-carousel") && new Swiper(".gallery-style-one-carousel", {
       // Optional parameters
       loop: true,
       freeMode: true,
@@ -293,7 +295,7 @@
     /* ==================================================
             # Service Carousel
          ===============================================*/
-    const serviceOneCarousel = new Swiper(".service-style-two-carousel", {
+    const serviceOneCarousel = typeof Swiper !== "undefined" && document.querySelector(".service-style-two-carousel") && new Swiper(".service-style-two-carousel", {
       // Optional parameters
       loop: true,
       freeMode: true,
@@ -320,7 +322,7 @@
     /* ==================================================
             # Team Carousel
          ===============================================*/
-    const teamCarousel = new Swiper(".team-style-one-carousel", {
+    const teamCarousel = typeof Swiper !== "undefined" && document.querySelector(".team-style-one-carousel") && new Swiper(".team-style-one-carousel", {
       // Optional parameters
       loop: true,
       freeMode: true,
@@ -347,7 +349,7 @@
     /* ==================================================
             # Clients Carousel
          ===============================================*/
-    const brandOneCarousel = new Swiper(".brand-style-one-carousel", {
+    const brandOneCarousel = typeof Swiper !== "undefined" && document.querySelector(".brand-style-one-carousel") && new Swiper(".brand-style-one-carousel", {
       // Optional parameters
       loop: true,
       slidesPerView: 2,
@@ -368,7 +370,7 @@
     /* ==================================================
             # Product Cateogry Carousel
          ===============================================*/
-    const proCatCarousel = new Swiper(".pro-cat-carousel", {
+    const proCatCarousel = typeof Swiper !== "undefined" && document.querySelector(".pro-cat-carousel") && new Swiper(".pro-cat-carousel", {
       // Optional parameters
       loop: true,
       slidesPerView: 1,
@@ -397,7 +399,7 @@
     /* ==================================================
 		    # Brand Carousel
 		 ===============================================*/
-    const brand6col = new Swiper(".brand5col", {
+    const brand6col = typeof Swiper !== "undefined" && document.querySelector(".brand5col") && new Swiper(".brand5col", {
       // Optional parameters
       loop: true,
       slidesPerView: 2,
@@ -426,7 +428,7 @@
     /* ==================================================
             # Product Gallery Carousel
          ===============================================*/
-    const productGallery = new Swiper(".product-gallery-carousel", {
+    const productGallery = typeof Swiper !== "undefined" && document.querySelector(".product-gallery-carousel") && new Swiper(".product-gallery-carousel", {
       // Optional parameters
       loop: true,
       slidesPerView: 2,
@@ -448,7 +450,7 @@
     /* ==================================================
             # Related Product Carousel
          ===============================================*/
-    const relatedProduct = new Swiper(".related-product-carousel", {
+    const relatedProduct = typeof Swiper !== "undefined" && document.querySelector(".related-product-carousel") && new Swiper(".related-product-carousel", {
       // Optional parameters
       loop: true,
       slidesPerView: 1,
@@ -470,7 +472,7 @@
     /* ==================================================
             # Timeine Carousel
          ===============================================*/
-    const timelineCarousel = new Swiper(".timeline-carousel", {
+    const timelineCarousel = typeof Swiper !== "undefined" && document.querySelector(".timeline-carousel") && new Swiper(".timeline-carousel", {
       // Optional parameters
       loop: true,
       freeMode: true,
@@ -496,7 +498,7 @@
       },
     });
 
-    const timelineCarousels = new Swiper(".timeline-carousels", {
+    const timelineCarousels = typeof Swiper !== "undefined" && document.querySelector(".timeline-carousels") && new Swiper(".timeline-carousels", {
       loop: true,
       freeMode: true,
       grabCursor: true,
@@ -585,18 +587,20 @@
 		    GSAP animation
 		================================================== */
 
-    gsap.set(".animation-shape", {
-      yPercent: 10,
-    });
+    if (document.querySelector(".animation-shape")) {
+      gsap.set(".animation-shape", {
+        yPercent: 10,
+      });
 
-    gsap.to(".animation-shape", {
-      yPercent: -100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".animation-shape",
-        scrub: 1,
-      },
-    });
+      gsap.to(".animation-shape", {
+        yPercent: -100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".animation-shape",
+          scrub: 1,
+        },
+      });
+    }
   });
 
   // end document ready function
