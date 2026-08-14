@@ -124,10 +124,36 @@ fetch_skill() {  # $1 = local name, $2 = raw URL
     || echo "  warning: $1 failed to download" >&2
 }
 
-fetch_skill apple-design      https://raw.githubusercontent.com/emilkowalski/skills/main/skills/apple-design/SKILL.md
-fetch_skill emil-design-eng   https://raw.githubusercontent.com/emilkowalski/skills/main/skills/emil-design-eng/SKILL.md
-fetch_skill prototype-variants https://raw.githubusercontent.com/emilkowalski/skills/main/skills/prototype/SKILL.md
-fetch_skill taste-web         https://raw.githubusercontent.com/tryproduck/produck-skills/main/skills/taste/SKILL.md
-fetch_skill taste-critique    https://raw.githubusercontent.com/alebgl77/claude-inc/main/skills/taste/SKILL.md
+EMIL=https://raw.githubusercontent.com/emilkowalski/skills/main/skills
+for s in apple-design emil-design-eng animate review-animations improve-animations \
+         find-animation-opportunities animation-vocabulary pick-ui-library; do
+  fetch_skill "$s" "$EMIL/$s/SKILL.md"
+done
+fetch_skill prototype-variants "$EMIL/prototype/SKILL.md"
+fetch_skill taste-web      https://raw.githubusercontent.com/tryproduck/produck-skills/main/skills/taste/SKILL.md
+fetch_skill taste-critique https://raw.githubusercontent.com/alebgl77/claude-inc/main/skills/taste/SKILL.md
+fetch_skill 21st-dev       https://raw.githubusercontent.com/21st-dev/claude-code-plugin/main/plugins/21st/skills/21st-registry/SKILL.md
+
+# impeccable (pbakaus) — 23 commands + 59 deterministic detector rules, built on
+# Anthropic's frontend-design. Cloned rather than fetched: it ships reference
+# files and scripts, not a single SKILL.md.
+log "Installing impeccable + frontend-design"
+_TMP=$(mktemp -d)
+if git clone --depth 1 https://github.com/pbakaus/impeccable.git "$_TMP/impeccable" >/dev/null 2>&1; then
+  rm -rf "$HOME/.claude/skills/impeccable"
+  cp -r "$_TMP/impeccable/.claude/skills/impeccable" "$HOME/.claude/skills/impeccable"
+  echo "  impeccable ($(ls "$HOME/.claude/skills/impeccable/reference"/*.md 2>/dev/null | wc -l) reference files)"
+else
+  echo "  warning: impeccable clone failed" >&2
+fi
+
+# Anthropic's frontend-design — the skill impeccable builds on
+if git clone --depth 1 --filter=blob:none --sparse https://github.com/anthropics/skills.git "$_TMP/anthropic" >/dev/null 2>&1; then
+  ( cd "$_TMP/anthropic" && git sparse-checkout set skills/frontend-design >/dev/null 2>&1 )
+  [ -d "$_TMP/anthropic/skills/frontend-design" ] && \
+    cp -r "$_TMP/anthropic/skills/frontend-design" "$HOME/.claude/skills/frontend-design" && \
+    echo "  frontend-design"
+fi
+rm -rf "$_TMP"
 
 log "Done. gstack skills: $(ls -d "$GSTACK_DIR"/*/SKILL.md 2>/dev/null | wc -l) | ruflo skills: $(ls .claude/skills 2>/dev/null | wc -l)"
