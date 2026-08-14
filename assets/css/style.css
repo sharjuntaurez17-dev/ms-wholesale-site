@@ -4375,7 +4375,7 @@ ul.top-feature li:nth-child(2) p {
 	content: "";
 	height: 100px;
 	width: 100%;
-	background: url(../img/shape/20.png);
+	background: url(../img/shape/20.webp);
 	z-index: -1;
 	background-size: cover;
 	background-position: center top;
@@ -9878,7 +9878,7 @@ position: absolute;
     content: "";
     height: 100px;
     width: 100%;
-    background: url(../img/shape/1.png);
+    background: url(../img/shape/1.webp);
     z-index: -1;
     background-size: contain;
     background-repeat: no-repeat;
@@ -10398,4 +10398,27 @@ footer .footer-item.about img.logo { max-width: 220px; height: auto; border-radi
     background: #8B0000;
     padding: 10px 16px;
     border-radius: 10px;
+}
+
+/* ---------------------------------------------------------------------------
+   Accessibility: minimum touch target size (WCAG 2.5.8 / 2.5.5)
+   Contact links and product links rendered at ~20-27px tall, below the 44px
+   minimum. Padding is applied so the tap area grows without shifting layout.
+--------------------------------------------------------------------------- */
+.top-bar .info .content a,
+.footer-item.contact .content a,
+.overlay .info h4 a,
+.footer-item.link ul li a {
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
+}
+
+/* Inline links inside body copy keep their natural rhythm but gain a
+   comfortable vertical hit area on touch devices. */
+@media (pointer: coarse) {
+    .top-bar .info a,
+    .footer-item.contact a {
+        padding-block: 2px;
+    }
 }
