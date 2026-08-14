@@ -156,4 +156,32 @@ if git clone --depth 1 --filter=blob:none --sparse https://github.com/anthropics
 fi
 rm -rf "$_TMP"
 
+# ---------------------------------------------------------------------------
+# playwright-cli (Microsoft) — browser automation as skills. More token-frugal
+# than Playwright MCP: it does not push the accessibility tree into context.
+# ---------------------------------------------------------------------------
+log "Installing playwright-cli"
+
+npm install -g @playwright/cli@latest --silent 2>/dev/null || \
+  echo "warning: could not install @playwright/cli" >&2
+
+if command -v playwright-cli >/dev/null 2>&1; then
+  # 'install --skills' exits non-zero here (workspace init fails) but still
+  # writes the skill, so the failure is tolerated.
+  playwright-cli install --skills >/dev/null 2>&1 || true
+
+  # The CLI defaults to the Chrome channel at /opt/google/chrome/chrome. In
+  # containers that ship only Playwright's Chromium, point the channel at it.
+  if [ ! -e /opt/google/chrome/chrome ] && [ -d "$PW_DIR" ]; then
+    _CHROME=$(ls -d "$PW_DIR"/chromium-[0-9]*/chrome-linux/chrome 2>/dev/null | head -1)
+    if [ -n "$_CHROME" ]; then
+      mkdir -p /opt/google/chrome && ln -sf "$_CHROME" /opt/google/chrome/chrome
+      echo "  linked chrome channel -> $_CHROME"
+    fi
+  fi
+  echo "playwright-cli OK ($(playwright-cli --version 2>/dev/null | head -1))"
+fi
+
+# .playwright/cli.config.json is committed: running as root needs --no-sandbox.
+
 log "Done. gstack skills: $(ls -d "$GSTACK_DIR"/*/SKILL.md 2>/dev/null | wc -l) | ruflo skills: $(ls .claude/skills 2>/dev/null | wc -l)"
