@@ -26,3 +26,4 @@ ruvector.db
 ruvector.db-*
 
 # gstack installs outside the repo (~/gstack); nothing to track here.
+.gstack/
