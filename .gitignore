@@ -27,3 +27,13 @@ ruvector.db-*
 
 # gstack installs outside the repo (~/gstack); nothing to track here.
 .gstack/
+
+# ui-ux-pro-max ships ~3.8 MB of CSV data and reinstalls via
+# scripts/setup-agents.sh, so it is not vendored here.
+.claude/skills/ui-ux-pro-max/
+.claude/skills/design/
+.claude/skills/design-system/
+.claude/skills/ui-styling/
+.claude/skills/brand/
+.claude/skills/banner-design/
+.claude/skills/slides/

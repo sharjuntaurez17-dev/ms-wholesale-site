@@ -95,4 +95,39 @@ npx -y ruflo@latest status >/dev/null 2>&1 \
   && echo "ruflo OK ($(npx -y ruflo@latest --version 2>/dev/null | head -1))" \
   || echo "warning: 'ruflo status' failed — run 'npx ruflo@latest doctor'" >&2
 
+# ---------------------------------------------------------------------------
+# ui-ux-pro-max — design intelligence: font pairings, palettes, UX guidelines,
+# GSAP presets. Ships ~3.8 MB of CSV data, so it is installed rather than
+# vendored (see .gitignore). Also lays down design/, design-system/,
+# ui-styling/, brand/, banner-design/ and slides/.
+# ---------------------------------------------------------------------------
+log "Installing ui-ux-pro-max design skills"
+
+npm install -g ui-ux-pro-max-cli --silent 2>/dev/null || \
+  echo "warning: could not install ui-ux-pro-max-cli" >&2
+
+if command -v uipro >/dev/null 2>&1; then
+  uipro init --ai claude >/dev/null 2>&1 \
+    && echo "ui-ux-pro-max OK ($(uipro --version 2>/dev/null | head -1))" \
+    || echo "warning: 'uipro init' failed" >&2
+fi
+
+# ---------------------------------------------------------------------------
+# Standalone community skills (single-file, fetched straight from GitHub)
+# ---------------------------------------------------------------------------
+log "Installing standalone design skills"
+
+fetch_skill() {  # $1 = local name, $2 = raw URL
+  mkdir -p "$HOME/.claude/skills/$1"
+  curl -fsSL "$2" -o "$HOME/.claude/skills/$1/SKILL.md" \
+    && echo "  $1" \
+    || echo "  warning: $1 failed to download" >&2
+}
+
+fetch_skill apple-design      https://raw.githubusercontent.com/emilkowalski/skills/main/skills/apple-design/SKILL.md
+fetch_skill emil-design-eng   https://raw.githubusercontent.com/emilkowalski/skills/main/skills/emil-design-eng/SKILL.md
+fetch_skill prototype-variants https://raw.githubusercontent.com/emilkowalski/skills/main/skills/prototype/SKILL.md
+fetch_skill taste-web         https://raw.githubusercontent.com/tryproduck/produck-skills/main/skills/taste/SKILL.md
+fetch_skill taste-critique    https://raw.githubusercontent.com/alebgl77/claude-inc/main/skills/taste/SKILL.md
+
 log "Done. gstack skills: $(ls -d "$GSTACK_DIR"/*/SKILL.md 2>/dev/null | wc -l) | ruflo skills: $(ls .claude/skills 2>/dev/null | wc -l)"
