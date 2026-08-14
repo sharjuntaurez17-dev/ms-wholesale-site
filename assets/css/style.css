@@ -10407,6 +10407,8 @@ footer .footer-item.about img.logo { max-width: 220px; height: auto; border-radi
 --------------------------------------------------------------------------- */
 .top-bar .info .content a,
 .footer-item.contact .content a,
+.side .widget.address .content a,
+.breadcrumb-area .list-item a,
 .overlay .info h4 a,
 .footer-item.link ul li a {
     display: inline-block;
