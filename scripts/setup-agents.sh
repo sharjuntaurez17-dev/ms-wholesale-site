@@ -124,12 +124,26 @@ fetch_skill() {  # $1 = local name, $2 = raw URL
     || echo "  warning: $1 failed to download" >&2
 }
 
-EMIL=https://raw.githubusercontent.com/emilkowalski/skills/main/skills
-for s in apple-design emil-design-eng animate review-animations improve-animations \
-         find-animation-opportunities animation-vocabulary pick-ui-library; do
-  fetch_skill "$s" "$EMIL/$s/SKILL.md"
-done
-fetch_skill prototype-variants "$EMIL/prototype/SKILL.md"
+# emilkowalski/skills — clone, don't fetch per-file. Several skills ship
+# supporting files next to SKILL.md (animate/RECIPES.md,
+# review-animations/STANDARDS.md, prototype/PICKER.md,
+# improve-animations/AUDIT.md + PLAN-TEMPLATE.md, ask-sonner/API.md), and a
+# SKILL.md-only fetch silently drops them.
+log "Installing emilkowalski/skills"
+_EMILTMP=$(mktemp -d)
+if git clone --depth 1 -q https://github.com/emilkowalski/skills.git "$_EMILTMP/e" 2>/dev/null; then
+  for d in "$_EMILTMP"/e/skills/*/; do
+    n=$(basename "$d")
+    dest="$HOME/.claude/skills/$n"
+    # installed under a clearer name locally
+    [ "$n" = "prototype" ] && dest="$HOME/.claude/skills/prototype-variants"
+    rm -rf "$dest"; cp -r "$d" "$dest"
+    echo "  $n ($(find "$dest" -type f | wc -l) files)"
+  done
+else
+  echo "  warning: emilkowalski/skills clone failed" >&2
+fi
+rm -rf "$_EMILTMP"
 fetch_skill taste-web      https://raw.githubusercontent.com/tryproduck/produck-skills/main/skills/taste/SKILL.md
 fetch_skill taste-critique https://raw.githubusercontent.com/alebgl77/claude-inc/main/skills/taste/SKILL.md
 fetch_skill 21st-dev       https://raw.githubusercontent.com/21st-dev/claude-code-plugin/main/plugins/21st/skills/21st-registry/SKILL.md
