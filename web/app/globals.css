@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — from the audit.
+
+   Type: 4 sizes, not 8. The old site ran 16/18/20/24/32/36/50/52, where 50 vs
+   52 was noise pretending to be hierarchy.
+   Colour: crimson + gold stay (they are the brand). The template's leftover
+   blue shadow and mint grey are gone, along with the pale yellow that did no
+   work on 21 elements.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Karla", system-ui, sans-serif;
+
+  /* brand */
+  --color-crimson: #8b0000;
+  --color-crimson-deep: #2d0000;
+  --color-gold: #c9a84c;
+
+  /* warm neutrals — bone, oat, ink */
+  --color-bone: #faf8f5;
+  --color-oat: #f0ebe3;
+  --color-ink: #14100e;
+  --color-ink-soft: #5c534d;
+
+  /* four steps, nothing between */
+  --text-body: 1.0625rem;      /* 17px */
+  --text-lead: 1.375rem;       /* 22px */
+  --text-section: 2rem;        /* 32px */
+  --text-display: clamp(3rem, 8vw, 6rem);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+/* apple-design SKILL.md §15 — tracking is size-specific. Large display type
+   reads too loose at default tracking; body text does not. */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+.lead {
+  font-size: var(--text-lead);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-ink-soft);
+  max-width: 34ch;
+}
+p { max-width: 68ch; }
+
+/* Press feedback — the old site had 2 :active rules in 190KB of CSS, one of
+   them the browser default. (find-animation-opportunities #2) */
+.pressable {
+  transition: transform 160ms ease-out, background-color 200ms ease-out,
+              color 200ms ease-out, border-color 200ms ease-out;
+}
+.pressable:active { transform: scale(0.97); }
+
+/* find-animation-opportunities #3 — the old site had 59+ transitions and no
+   reduced-motion path at all. Gentler, not zero: opacity survives so state
+   changes stay legible. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection { background: var(--color-gold); color: var(--color-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

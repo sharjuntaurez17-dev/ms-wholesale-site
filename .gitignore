@@ -41,3 +41,8 @@ ruvector.db-*
 # playwright-cli: skill + session artifacts reinstall via scripts/setup-agents.sh
 .claude/skills/playwright-cli/
 .playwright-cli/
+
+# Next.js rebuild (web/)
+web/node_modules/
+web/.next/
+web/out/
