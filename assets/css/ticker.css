@@ -1,0 +1,95 @@
+/* ================================================================
+   Scrolling announcement ticker, above the top bar.
+   Same technique as the M-MART marquee: a track of exactly two
+   identical groups translated 0 -> -50%, so the loop is seamless.
+   ================================================================ */
+
+.ms-ticker {
+    --ticker-bg: #efc24a;
+    --ticker-ink: #3b0a0a;
+    --ticker-speed: 38s;
+
+    position: relative;
+    overflow: hidden;
+    background: var(--ticker-bg);
+    padding: 9px 0;
+    /* Melt the text in and out at the edges instead of clipping hard */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.ms-ticker__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: msTickerScroll var(--ticker-speed) linear infinite;
+}
+
+.ms-ticker__group {
+    display: flex;
+    align-items: center;
+    flex: none;
+}
+
+.ms-ticker__item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 26px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--ticker-ink);
+}
+
+.ms-ticker__sep {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ticker-ink);
+    opacity: 0.55;
+}
+
+@keyframes msTickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Pause on hover so the text can be read */
+.ms-ticker:hover .ms-ticker__track {
+    animation-play-state: paused;
+}
+
+/* WCAG 2.2.2 - moving content needs a way to stop. Reduced motion
+   halts it entirely and centres the message instead. */
+@media (prefers-reduced-motion: reduce) {
+    .ms-ticker__track {
+        animation: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .ms-ticker__group + .ms-ticker__group {
+        display: none;
+    }
+
+    .ms-ticker__group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .ms-ticker {
+        padding: 7px 0;
+    }
+
+    .ms-ticker__item {
+        font-size: 0.75rem;
+        letter-spacing: 0.07em;
+        padding: 0 18px;
+    }
+}
