@@ -1,0 +1,152 @@
+/* ================================================================
+   Today's Strength band (homepage, above the supplier carousel).
+   Everything is scoped under .ms-strength so it cannot affect the
+   rest of the template.
+   ================================================================ */
+
+.ms-strength {
+    padding: 70px 0 60px;
+}
+
+.ms-strength .ms-strength-title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin: 0 0 8px;
+}
+
+.ms-strength .ms-strength-rule {
+    width: 90px;
+    height: 2px;
+    margin: 0 auto 46px;
+    background: linear-gradient(to right, transparent, var(--color-primary), transparent);
+}
+
+/* ---- Stat row ------------------------------------------------ */
+
+.ms-strength .ms-strength-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 34px 18px;
+    margin-bottom: 52px;
+}
+
+.ms-strength .ms-strength-stat {
+    text-align: center;
+    padding: 0 12px;
+    border-right: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+.ms-strength .ms-strength-stat:last-child {
+    border-right: 0;
+}
+
+.ms-strength .ms-strength-stat i {
+    display: block;
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+}
+
+.ms-strength .ms-strength-num {
+    display: block;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-primary);
+}
+
+.ms-strength .ms-strength-label {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---- Customer types ------------------------------------------ */
+
+.ms-strength .ms-strength-sub {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    color: var(--color-primary);
+    text-align: center;
+    margin: 0 0 20px;
+    letter-spacing: 0.02em;
+}
+
+.ms-strength .ms-strength-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 0;
+    margin: 0 0 46px;
+    padding: 0;
+    list-style: none;
+}
+
+.ms-strength .ms-strength-tags li {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0 14px;
+}
+
+/* Gold dot between items, matching the printed layout */
+.ms-strength .ms-strength-tags li::after {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    margin-left: 14px;
+    margin-right: -14px;
+    opacity: 0.75;
+}
+
+.ms-strength .ms-strength-tags li:last-child::after {
+    display: none;
+}
+
+/* ---- Tagline ------------------------------------------------- */
+
+.ms-strength .ms-strength-tagline {
+    text-align: center;
+    font-size: clamp(1.05rem, 2.1vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-primary);
+    margin: 0;
+    padding-top: 26px;
+    border-top: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+/* ---- Small screens ------------------------------------------- */
+
+@media (max-width: 767px) {
+    .ms-strength {
+        padding: 50px 0 44px;
+    }
+
+    .ms-strength .ms-strength-stat {
+        border-right: 0;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        padding-bottom: 22px;
+    }
+
+    .ms-strength .ms-strength-stat:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .ms-strength .ms-strength-tags li {
+        padding: 0 10px;
+    }
+
+    .ms-strength .ms-strength-tags li::after {
+        margin-left: 10px;
+        margin-right: -10px;
+    }
+}
