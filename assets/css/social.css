@@ -1,0 +1,61 @@
+/* ================================================================
+   Footer social icons. The template's own social list lives in the
+   slide-out menu, which most visitors never open, so this is a
+   separate visible row under the footer logo.
+   ================================================================ */
+
+.ms-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ms-social li {
+    margin: 0;
+    padding: 0;
+}
+
+.ms-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* 44px keeps these above the WCAG 2.5.8 minimum touch target */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: var(--color-primary);
+    font-size: 1rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease,
+                border-color 0.25s ease, transform 0.25s ease;
+}
+
+.ms-social a:hover,
+.ms-social a:focus-visible {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #2b0505;
+    transform: translateY(-2px);
+}
+
+.ms-social a:active {
+    transform: translateY(0) scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ms-social a {
+        transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .ms-social a:hover,
+    .ms-social a:focus-visible,
+    .ms-social a:active {
+        transform: none;
+    }
+}
