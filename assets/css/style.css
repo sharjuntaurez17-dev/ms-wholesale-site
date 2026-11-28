@@ -10335,7 +10335,7 @@ nav.navbar.validnavs .navbar-toggle i{
 .navbar .navbar-brand img.logo,
 .navbar-brand-left .navbar-brand img { max-height: 60px; width: auto; border-radius: 0; }
 .side .widget .logo img,
-footer .footer-item.about img.logo { max-width: 220px; height: auto; border-radius: 0; }
+footer .footer-item.about img.logo { max-width: 150px; height: auto; border-radius: 0; }
 .collapse.navbar-collapse > img { max-height: 46px; width: auto; }
 /* Keep nav text readable on white bar */
 .navbar.navbar-default .nav.navbar-nav > li > a { color: #1A0000; }
